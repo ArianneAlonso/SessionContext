@@ -1,0 +1,62 @@
+Objetivo
+Implementar un sistema de sesión en una aplicación React sin utilizar React Router,
+en el cual se muestre un componente de inicio de sesión (Login) si no hay sesión
+activa, o una pantalla de bienvenida (Home) cuando el usuario ha iniciado sesión. Se
+integrará una solicitud de autenticación hacia un backend existente, y se empleará un
+custom hook para manejar el estado de sesión y las funciones de autenticación.
+Instrucciones
+1. Creación del SessionProvider:
+○ Implementar un contexto en React llamado SessionProvider,
+encargado de gestionar el estado de sesión en toda la aplicación.
+○ Definir funciones para iniciar y cerrar sesión. La función de inicio de
+sesión debe hacer una solicitud de autenticación a un backend para
+validar las credenciales.
+○ Crear un custom hook (useSession) para encapsular el acceso al
+contexto de sesión, de modo que los componentes puedan acceder
+fácilmente al estado de sesión y a las funciones de autenticación desde
+cualquier parte de la aplicación.
+
+2. Implementación del Custom Hook (useSession):
+○ Este custom hook (useSession) deberá retornar el estado de la sesión
+y las funciones login y logout.
+○ La función login dentro del hook realizará una solicitud al backend,
+enviando las credenciales ingresadas por el usuario.
+○ En caso de autenticación exitosa, el hook almacenará los datos del
+usuario y/o el token en el contexto; si falla, retornará un mensaje de
+error.
+○ La función logout borrará la información de sesión y el token de la
+aplicación.
+3. Componente de Login:
+○ Crear un componente de Login que capture las credenciales del usuario
+y, al hacer clic en "Iniciar sesión", use el custom hook useSession
+para llamar a la función login y hacer la autenticación contra el
+backend.
+
+○ En caso de autenticación fallida, el componente debe mostrar un
+mensaje de error.
+4. Configuración del Backend:
+○ Utilizar un backend que permita autenticar usuarios y devuelva la
+información del usuario (como nombre, rol, email) y/o un token en caso
+de autenticación exitosa.
+○ Almacenar el token en el contexto para su uso durante la sesión del
+usuario.
+
+5. Componente de Home:
+○ Crear una pantalla de bienvenida accesible únicamente cuando haya
+una sesión activa, mostrando un saludo personalizado que incluya el
+nombre del usuario.
+○ Proporcionar una opción para "cerrar sesión", la cual eliminará el
+estado de sesión y el token mediante la función logout del hook
+useSession.
+
+6. Renderizado Condicional en el Componente Principal:
+○ En el componente principal de la aplicación, emplear un renderizado
+condicional para mostrar la pantalla de Login si no hay sesión activa, y la
+pantalla de Home cuando el usuario ha iniciado sesión.
+○ Utilizar el SessionProvider para envolver toda la aplicación,
+asegurando que el estado de sesión esté disponible en todos los
+componentes a través del custom hook useSession.
+
+Ejercicio Adicional
+Añadir un indicador de "cargando" mientras se realiza la solicitud de autenticación,
+mostrando visualmente el estado de carga hasta que el backend responda.
